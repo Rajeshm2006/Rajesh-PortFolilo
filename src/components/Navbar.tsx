@@ -31,20 +31,20 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Centered Floating Pill Navigation Bar (matching video template) */}
+      {/* Centered Floating Pill Navigation Bar (Clean Light Theme) */}
       <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <div className="pointer-events-auto flex items-center justify-between sm:justify-start gap-1 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#121720]/90 backdrop-blur-xl border border-[#232B3B] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="pointer-events-auto flex items-center justify-between sm:justify-start gap-1 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/90 backdrop-blur-xl border border-[#E5E5E5] shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
           
           {/* Logo Badge */}
           <Link
             href="/"
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-xs font-bold text-white tracking-wider hover:opacity-80 transition-opacity"
+            className="flex items-center space-x-1.5 px-2.5 py-1 text-xs font-bold text-[#111111] tracking-wider hover:opacity-80 transition-opacity"
           >
-            <span className="w-2 h-2 rounded-full bg-white inline-block"></span>
+            <span className="w-2 h-2 rounded-full bg-[#111111] inline-block"></span>
             <span className="font-mono text-sm">rm.</span>
           </Link>
 
-          <div className="h-4 w-px bg-[#232B3B] mx-1 hidden sm:block"></div>
+          <div className="h-4 w-px bg-[#E5E5E5] mx-1 hidden sm:block"></div>
 
           {/* Desktop Nav Items */}
           <nav className="hidden md:flex items-center space-x-1">
@@ -57,8 +57,8 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   className={`inline-flex items-center space-x-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-white text-[#0B0E14] shadow-sm"
-                      : "text-[#8892B0] hover:text-white hover:bg-white/10"
+                      ? "bg-[#111111] text-white shadow-sm"
+                      : "text-[#666666] hover:text-[#111111] hover:bg-[#F2F2F2]"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -68,15 +68,15 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          <div className="h-4 w-px bg-[#232B3B] mx-1 hidden md:block"></div>
+          <div className="h-4 w-px bg-[#E5E5E5] mx-1 hidden md:block"></div>
 
           {/* Resume Download Action */}
           <a
             href={portfolioData.profile.resumeUrl}
             download
-            className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-[11px] font-semibold tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/15 rounded-full transition-colors"
+            className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-[11px] font-semibold tracking-wider text-[#111111] bg-[#F2F2F2] hover:bg-[#E5E5E5] border border-[#E5E5E5] rounded-full transition-colors"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-[#111111]" />
             <span>RESUME</span>
           </a>
 
@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
             <a
               href={portfolioData.profile.resumeUrl}
               download
-              className="p-1.5 text-white/80 hover:text-white"
+              className="p-1.5 text-[#111111] hover:bg-[#F2F2F2] rounded-full"
               aria-label="Download Resume"
               title="Resume"
             >
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-[#8892B0] hover:text-white rounded-full transition-colors"
+              className="p-1.5 text-[#666666] hover:text-[#111111] rounded-full transition-colors"
               aria-label="Toggle navigation"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -104,8 +104,8 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md md:hidden pt-24 px-6 space-y-3 animate-in fade-in duration-200">
-          <div className="bg-[#121720] border border-[#232B3B] rounded-2xl p-4 space-y-1">
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden pt-24 px-6 space-y-3 animate-in fade-in duration-200">
+          <div className="bg-white border border-[#E5E5E5] rounded-2xl p-4 space-y-1 shadow-2xl">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               const Icon = item.icon;
@@ -116,15 +116,15 @@ export const Navbar: React.FC = () => {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-xl transition-colors ${
                     isActive
-                      ? "bg-white text-[#0B0E14]"
-                      : "text-[#8892B0] hover:text-white hover:bg-white/5"
+                      ? "bg-[#111111] text-white"
+                      : "text-[#666666] hover:text-[#111111] hover:bg-[#F2F2F2]"
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <Icon className="w-4 h-4" />
                     <span>{item.label}</span>
                   </div>
-                  {isActive && <span className="w-2 h-2 rounded-full bg-[#0B0E14]"></span>}
+                  {isActive && <span className="w-2 h-2 rounded-full bg-white"></span>}
                 </Link>
               );
             })}

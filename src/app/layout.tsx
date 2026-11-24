@@ -34,9 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-[#0B0E14] text-white min-h-screen flex flex-col antialiased selection:bg-white selection:text-[#0B0E14] relative">
-        {/* Background Visual Effects */}
+    <html lang="en">
+      <body className="bg-white text-[#111111] min-h-screen flex flex-col antialiased selection:bg-[#111111] selection:text-white relative">
+        {/* Background Visual Effects for White Background */}
         <BackgroundEffects />
         
         {/* Navigation Bar */}

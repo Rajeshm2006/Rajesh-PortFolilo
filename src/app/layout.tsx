@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { BackgroundEffects } from "@/components/BackgroundEffects";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -34,11 +35,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-[#0B0E14] text-white min-h-screen flex flex-col antialiased selection:bg-white selection:text-[#0B0E14]">
+      <body className="bg-[#0B0E14] text-white min-h-screen flex flex-col antialiased selection:bg-white selection:text-[#0B0E14] relative">
+        {/* Background Visual Effects */}
+        <BackgroundEffects />
+        
+        {/* Navigation Bar */}
         <Navbar />
-        <main className="flex-1 pt-20 sm:pt-24 pb-16">
+
+        {/* Main Content */}
+        <main className="flex-1 pt-20 sm:pt-24 pb-16 relative z-10">
           {children}
         </main>
+
+        {/* Footer */}
         <Footer />
       </body>
     </html>

@@ -38,3 +38,18 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #3B465E;
 }
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.32;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseGlow 9s ease-in-out infinite;
+}

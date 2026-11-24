@@ -1,71 +1,48 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { portfolioData } from "@/data/portfolioData";
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const Footer: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <footer className="bg-white/95 backdrop-blur-md border-t border-[#E5E5E5] py-12 px-4 sm:px-6 lg:px-8 mt-auto relative z-10">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        {/* Left: Branding & Role */}
-        <div className="space-y-1 text-center sm:text-left">
-          <div className="flex items-center justify-center sm:justify-start space-x-2">
-            <span className="w-2.5 h-2.5 bg-[#111111] rounded-full inline-block"></span>
-            <p className="text-base font-extrabold text-[#111111] tracking-tight">
-              {portfolioData.profile.name}
-            </p>
-          </div>
-          <p className="text-xs text-[#777777]">
-            {portfolioData.profile.title} &bull; {portfolioData.education.institution}
-          </p>
+    <footer className="border-t border-[#1E2330] py-10 px-4 sm:px-6 lg:px-8 mt-auto relative z-10 bg-[#0A0D14]">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#8A94A6]">
+        
+        {/* Left: Logo */}
+        <div className="flex items-center space-x-2">
+          <span className="font-mono text-base font-bold text-white tracking-tight">rajesh.</span>
         </div>
 
-        {/* Center: Social Links */}
-        <div className="flex items-center space-x-3">
+        {/* Center: Navigation Links (Matching hxndev.com footer in frame 00:17) */}
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <button onClick={() => scrollTo("home")} className="hover:text-white transition-colors">Home</button>
+          <button onClick={() => scrollTo("about")} className="hover:text-white transition-colors">About</button>
+          <button onClick={() => scrollTo("experience")} className="hover:text-white transition-colors">Experience</button>
+          <button onClick={() => scrollTo("education")} className="hover:text-white transition-colors">Education</button>
+          <button onClick={() => scrollTo("projects")} className="hover:text-white transition-colors">Projects</button>
+          <button onClick={() => scrollTo("certifications")} className="hover:text-white transition-colors">Courses</button>
+          <button onClick={() => scrollTo("contact")} className="hover:text-white transition-colors">Contact</button>
           <a
-            href={portfolioData.profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 border border-[#E5E5E5] bg-[#F8F9FA] rounded-xl text-[#666666] hover:text-[#111111] hover:border-[#111111] transition-colors"
-            aria-label="GitHub Profile"
+            href={portfolioData.profile.resumeUrl}
+            download
+            className="inline-flex items-center space-x-0.5 hover:text-white transition-colors text-white/90"
           >
-            <Github className="w-4 h-4" />
-          </a>
-          <a
-            href={portfolioData.profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 border border-[#E5E5E5] bg-[#F8F9FA] rounded-xl text-[#666666] hover:text-[#111111] hover:border-[#111111] transition-colors"
-            aria-label="LinkedIn Profile"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
-          <a
-            href={`mailto:${portfolioData.profile.email}`}
-            className="p-2 border border-[#E5E5E5] bg-[#F8F9FA] rounded-xl text-[#666666] hover:text-[#111111] hover:border-[#111111] transition-colors"
-            aria-label="Email"
-          >
-            <Mail className="w-4 h-4" />
+            <span>Résumé</span>
+            <ArrowUpRight className="w-3 h-3" />
           </a>
         </div>
 
-        {/* Right: Back to Top & Copyright */}
-        <div className="flex items-center space-x-4 text-xs text-[#777777]">
+        {/* Right: Copyright */}
+        <div>
           <span>&copy; {new Date().getFullYear()} {portfolioData.profile.name}</span>
-          <button
-            onClick={scrollToTop}
-            className="p-2 border border-[#E5E5E5] bg-[#F8F9FA] rounded-xl text-[#666666] hover:text-[#111111] hover:border-[#111111] transition-colors"
-            aria-label="Back to top"
-            title="Back to top"
-          >
-            <ArrowUp className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </footer>

@@ -10,9 +10,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Rajesh M | AI/ML Engineer & Data Scientist",
+  title: "Rajesh M — AI/ML Engineer & Data Scientist",
   description:
-    "Official portfolio of Rajesh M — Final-year B.Tech AI & ML student, Data Analyst, and AI/ML Engineer.",
+    "Official portfolio of Rajesh M — AI/ML Engineer and Data Scientist specializing in Machine Learning, Generative AI, and Data Analytics at Sri Shakthi Institute of Engineering and Technology.",
   keywords: [
     "Rajesh M",
     "AI/ML Engineer",
@@ -34,16 +34,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-white text-[#111111] min-h-screen flex flex-col antialiased selection:bg-[#111111] selection:text-white relative">
-        {/* Background Visual Effects for White Background */}
+    <html lang="en" className="dark">
+      <body className="bg-[#0A0D14] text-white min-h-screen flex flex-col antialiased selection:bg-[#E55B44] selection:text-white relative">
+        {/* Background Visual Effects */}
         <BackgroundEffects />
         
         {/* Navigation Bar */}
         <Navbar />
 
         {/* Main Content */}
-        <main className="flex-1 pt-20 sm:pt-24 pb-16 relative z-10">
+        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 relative z-10">
           {children}
         </main>
 

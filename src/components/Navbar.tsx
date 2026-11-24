@@ -1,136 +1,153 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import { portfolioData } from "@/data/portfolioData";
-import { 
-  Home, 
-  User, 
-  Cpu, 
-  FolderGit2, 
-  Briefcase, 
-  Mail, 
-  Download, 
-  Menu, 
-  X 
-} from "lucide-react";
+import { Download, Menu, X, ArrowUpRight } from "lucide-react";
 
 const navItems = [
-  { label: "INTRO", href: "/", icon: Home },
-  { label: "ABOUT", href: "/about", icon: User },
-  { label: "SKILLS", href: "/skills", icon: Cpu },
-  { label: "PROJECTS", href: "/projects", icon: FolderGit2 },
-  { label: "EXPERIENCE", href: "/experience", icon: Briefcase },
-  { label: "CONTACT", href: "/contact", icon: Mail },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
+  { label: "Projects", href: "#projects" },
+  { label: "Courses", href: "#certifications" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export const Navbar: React.FC = () => {
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      const sectionIds = navItems.map((item) => item.href.substring(1));
+      const scrollPos = window.scrollY + 140;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && scrollPos >= el.offsetTop) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (href: string) => {
+    setMobileMenuOpen(false);
+    const id = href.substring(1);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <>
-      {/* Centered Floating Pill Navigation Bar (Clean Light Theme) */}
-      <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <div className="pointer-events-auto flex items-center justify-between sm:justify-start gap-1 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/90 backdrop-blur-xl border border-[#E5E5E5] shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-          
-          {/* Logo Badge */}
-          <Link
-            href="/"
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-xs font-bold text-[#111111] tracking-wider hover:opacity-80 transition-opacity"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#111111] inline-block"></span>
-            <span className="font-mono text-sm">rm.</span>
-          </Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0A0D14]/90 backdrop-blur-md border-b border-[#1E2330] py-3.5 shadow-lg shadow-black/20"
+          : "bg-transparent border-b border-transparent py-5"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        
+        {/* Left: Logo (Matching hxndev.) */}
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollTo("#home");
+          }}
+          className="flex items-center space-x-1.5 text-lg font-bold tracking-tight text-white hover:opacity-85 transition-opacity"
+        >
+          <span className="font-mono text-xl">rajesh.</span>
+        </a>
 
-          <div className="h-4 w-px bg-[#E5E5E5] mx-1 hidden sm:block"></div>
+        {/* Center: Navigation Pill Container (Matching hxndev.com style) */}
+        <nav className="hidden md:flex items-center space-x-1 px-3 py-1.5 rounded-full bg-[#11141D]/90 backdrop-blur-md border border-[#1E2330] shadow-sm">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.substring(1);
+            return (
+              <button
+                key={item.label}
+                onClick={() => scrollTo(item.href)}
+                className={`px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 relative ${
+                  isActive
+                    ? "text-white font-semibold bg-white/10"
+                    : "text-[#8A94A6] hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && (
+                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-0.5 rounded-full bg-white"></span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`inline-flex items-center space-x-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider rounded-full transition-all duration-200 ${
-                    isActive
-                      ? "bg-[#111111] text-white shadow-sm"
-                      : "text-[#666666] hover:text-[#111111] hover:bg-[#F2F2F2]"
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="h-4 w-px bg-[#E5E5E5] mx-1 hidden md:block"></div>
-
-          {/* Resume Download Action */}
+        {/* Right: Resume Button */}
+        <div className="hidden sm:flex items-center space-x-3">
           <a
             href={portfolioData.profile.resumeUrl}
             download
-            className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-[11px] font-semibold tracking-wider text-[#111111] bg-[#F2F2F2] hover:bg-[#E5E5E5] border border-[#E5E5E5] rounded-full transition-colors"
+            className="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/15 transition-all shadow-sm"
           >
-            <Download className="w-3.5 h-3.5 text-[#111111]" />
-            <span>RESUME</span>
+            <span>Résumé</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-white/80" />
           </a>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden space-x-1">
-            <a
-              href={portfolioData.profile.resumeUrl}
-              download
-              className="p-1.5 text-[#111111] hover:bg-[#F2F2F2] rounded-full"
-              aria-label="Download Resume"
-              title="Resume"
-            >
-              <Download className="w-4 h-4" />
-            </a>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-[#666666] hover:text-[#111111] rounded-full transition-colors"
-              aria-label="Toggle navigation"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
         </div>
-      </header>
 
-      {/* Mobile Drawer Menu */}
+        {/* Mobile Menu Button */}
+        <div className="flex items-center sm:hidden space-x-2">
+          <a
+            href={portfolioData.profile.resumeUrl}
+            download
+            className="p-1.5 text-white/90 hover:text-white"
+            aria-label="Download Resume"
+          >
+            <Download className="w-4 h-4" />
+          </a>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-1.5 text-[#8A94A6] hover:text-white rounded-lg transition-colors"
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden pt-24 px-6 space-y-3 animate-in fade-in duration-200">
-          <div className="bg-white border border-[#E5E5E5] rounded-2xl p-4 space-y-1 shadow-2xl">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-xl transition-colors ${
-                    isActive
-                      ? "bg-[#111111] text-white"
-                      : "text-[#666666] hover:text-[#111111] hover:bg-[#F2F2F2]"
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <Icon className="w-4 h-4" />
-                    <span>{item.label}</span>
-                  </div>
-                  {isActive && <span className="w-2 h-2 rounded-full bg-white"></span>}
-                </Link>
-              );
-            })}
-          </div>
+        <div className="sm:hidden bg-[#0A0D14] border-b border-[#1E2330] px-4 pt-3 pb-6 space-y-1.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.substring(1);
+            return (
+              <button
+                key={item.label}
+                onClick={() => scrollTo(item.href)}
+                className={`w-full text-left px-4 py-2.5 text-sm rounded-xl transition-colors flex items-center justify-between ${
+                  isActive
+                    ? "bg-[#11141D] text-white font-semibold border border-[#1E2330]"
+                    : "text-[#8A94A6] hover:text-white hover:bg-[#11141D]/50"
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+              </button>
+            );
+          })}
         </div>
       )}
-    </>
+    </header>
   );
 };

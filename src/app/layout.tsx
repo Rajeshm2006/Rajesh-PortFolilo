@@ -43,7 +43,7 @@ export default function RootLayout({
         <Navbar />
 
         {/* Main Content */}
-        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 relative z-10">
+        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 relative z-10">
           {children}
         </main>
 

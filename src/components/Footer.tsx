@@ -1,50 +1,52 @@
-"use client";
+import { Mail } from 'lucide-react';
+import { GithubBrandIcon, LinkedinBrandIcon } from './BrandIcons';
+import { personalInfo } from '../data/personal';
 
-import React from "react";
-import { portfolioData } from "@/data/portfolioData";
-import { ArrowUpRight } from "lucide-react";
-
-export const Footer: React.FC = () => {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+export function Footer() {
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[#1E2330] py-10 px-4 sm:px-6 lg:px-8 mt-auto relative z-10 bg-[#0A0D14]">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#8A94A6]">
-        
-        {/* Left: Logo */}
-        <div className="flex items-center space-x-2">
-          <span className="font-mono text-base font-bold text-white tracking-tight">rajesh.</span>
+    <footer className="border-t border-[#303A33] bg-[#101312] py-10">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-5 sm:flex-row sm:px-8">
+        <div className="text-center sm:text-left">
+          <div className="font-display text-sm font-bold tracking-wider text-white">
+            {personalInfo.brandName}
+          </div>
+          <p className="mt-1 text-xs text-[#A5AEA8]">
+            &copy; {year} {personalInfo.name}. {personalInfo.title}.
+          </p>
         </div>
 
-        {/* Center: Navigation Links (Matching hxndev.com footer in frame 00:17) */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <button onClick={() => scrollTo("home")} className="hover:text-white transition-colors">Home</button>
-          <button onClick={() => scrollTo("about")} className="hover:text-white transition-colors">About</button>
-          <button onClick={() => scrollTo("experience")} className="hover:text-white transition-colors">Experience</button>
-          <button onClick={() => scrollTo("education")} className="hover:text-white transition-colors">Education</button>
-          <button onClick={() => scrollTo("projects")} className="hover:text-white transition-colors">Projects</button>
-          <button onClick={() => scrollTo("certifications")} className="hover:text-white transition-colors">Courses</button>
-          <button onClick={() => scrollTo("contact")} className="hover:text-white transition-colors">Contact</button>
+        <div className="flex items-center gap-3">
           <a
-            href={portfolioData.profile.resumeUrl}
-            download
-            className="inline-flex items-center space-x-0.5 hover:text-white transition-colors text-white/90"
+            href={personalInfo.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#303A33] bg-[#171C19] text-[#A5AEA8] transition-colors hover:border-[#9BE15D]/60 hover:text-[#9BE15D]"
           >
-            <span>Résumé</span>
-            <ArrowUpRight className="w-3 h-3" />
+            <GithubBrandIcon className="h-4 w-4" />
           </a>
-        </div>
-
-        {/* Right: Copyright */}
-        <div>
-          <span>&copy; {new Date().getFullYear()} {portfolioData.profile.name}</span>
+          <a
+            href={personalInfo.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#303A33] bg-[#171C19] text-[#A5AEA8] transition-colors hover:border-[#9BE15D]/60 hover:text-[#9BE15D]"
+          >
+            <LinkedinBrandIcon className="h-4 w-4" />
+          </a>
+          {personalInfo.socials.email ? (
+            <a
+              href={`mailto:${personalInfo.socials.email}`}
+              aria-label="Email"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#303A33] bg-[#171C19] text-[#A5AEA8] transition-colors hover:border-[#9BE15D]/60 hover:text-[#9BE15D]"
+            >
+              <Mail className="h-4 w-4" />
+            </a>
+          ) : null}
         </div>
       </div>
     </footer>
   );
-};
+}

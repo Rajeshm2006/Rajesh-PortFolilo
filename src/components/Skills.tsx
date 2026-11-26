@@ -1,68 +1,117 @@
-"use client";
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  BarChart3,
+  BookOpen,
+  Bot,
+  Cloud,
+  Code2,
+  Compass,
+  Cpu,
+  Database,
+  FileSpreadsheet,
+  GitBranch,
+  Layers,
+  LineChart,
+  PieChart,
+  Search,
+  Sigma,
+  Sparkles,
+  Table2,
+  Terminal,
+  Wrench,
+} from 'lucide-react';
+import { skillCategories, SkillCategory } from '../data/skills';
+import { GithubBrandIcon } from './BrandIcons';
+import {
+  SectionHeader,
+  StaggerContainer,
+  StaggerItem,
+} from './MotionPrimitives';
 
-import React from "react";
-import { portfolioData } from "@/data/portfolioData";
-import { Terminal, Database, Cpu, BarChart3, Sparkles, Layers } from "lucide-react";
+type IconKey = SkillCategory['skills'][number]['iconKey'];
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  Programming: <Terminal className="w-4 h-4 text-[#111111]" />,
-  "Data Science": <Layers className="w-4 h-4 text-[#111111]" />,
-  "Machine Learning": <Cpu className="w-4 h-4 text-[#111111]" />,
-  "Data Analytics": <BarChart3 className="w-4 h-4 text-[#111111]" />,
-  "AI & Generative AI": <Sparkles className="w-4 h-4 text-[#111111]" />,
-  "Databases and Tools": <Database className="w-4 h-4 text-[#111111]" />,
+const ICON_MAP: Record<IconKey, typeof Code2> = {
+  code: Code2,
+  database: Database,
+  cpu: Cpu,
+  layers: Layers,
+  table: Table2,
+  sigma: Sigma,
+  sparkles: Sparkles,
+  bot: Bot,
+  search: Search,
+  terminal: Terminal,
+  barchart: BarChart3,
+  sheet: FileSpreadsheet,
+  linechart: LineChart,
+  piechart: PieChart,
+  compass: Compass,
+  gitbranch: GitBranch,
+  github: GithubBrandIcon as unknown as typeof Code2,
+  vscode: Wrench,
+  book: BookOpen,
+  cloud: Cloud,
 };
 
-export const Skills: React.FC = () => {
+export function Skills() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-white">
-      <div className="max-w-6xl mx-auto space-y-12">
-        {/* Section Heading */}
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-widest text-[#777777] font-semibold">
-            02 // Capabilities
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight">
-            Technical Skills
-          </h2>
-          <p className="text-sm text-[#777777] max-w-2xl">
-            Core technical competencies across Programming, Machine Learning, Data Analytics, Generative AI, and Databases.
-          </p>
-        </div>
+    <section
+      id="skills"
+      className="border-b border-[#303A33]/70 bg-[#101312] py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeader
+          eyebrow="Technical Stack"
+          title="Technologies I Work With"
+          description="Practical tools and frameworks across machine learning, data analytics, and software engineering."
+        />
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {portfolioData.skills.map((cat) => (
-            <div
-              key={cat.category}
-              className="p-6 border border-[#E5E5E5] rounded-xl bg-white hover:border-[#111111] transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex flex-col justify-between"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center space-x-2.5 pb-2 border-b border-[#E5E5E5]">
-                  <div className="p-1.5 bg-[#F2F2F2] rounded-md">
-                    {categoryIcons[cat.category] || <Terminal className="w-4 h-4 text-[#111111]" />}
-                  </div>
-                  <h3 className="text-sm font-bold text-[#111111] tracking-tight">
-                    {cat.category}
+        <StaggerContainer className="grid gap-6 md:grid-cols-2">
+          {skillCategories.map((category) => (
+            <StaggerItem key={category.id}>
+              <motion.div
+                whileHover={prefersReducedMotion ? undefined : { y: -3 }}
+                transition={{ duration: 0.2 }}
+                className="flex h-full flex-col rounded-2xl border border-[#303A33] bg-[#171C19] p-6 transition-colors duration-200 hover:border-[#9BE15D]/50 sm:p-7"
+              >
+                <div className="mb-5 border-b border-[#303A33] pb-4">
+                  <h3 className="font-display text-lg font-bold text-white sm:text-xl">
+                    {category.title}
                   </h3>
+                  <p className="mt-1.5 text-sm text-[#A5AEA8]">
+                    {category.description}
+                  </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2.5 py-1 text-xs font-medium text-[#111111] bg-[#F2F2F2] border border-[#E5E5E5] rounded-md transition-colors hover:bg-white hover:border-[#111111]"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
+                  {category.skills.map((skill) => {
+                    const Icon = ICON_MAP[skill.iconKey] ?? Code2;
+                    return (
+                      <motion.div
+                        key={skill.name}
+                        whileHover={
+                          prefersReducedMotion ? undefined : { x: 2 }
+                        }
+                        transition={{ duration: 0.15 }}
+                        className="group flex items-center gap-3 rounded-xl border border-[#303A33] bg-[#1D2520] px-3.5 py-3 transition-colors duration-200 hover:border-[#9BE15D]/60"
+                      >
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#101312] text-[#9BE15D] transition-colors group-hover:bg-[#9BE15D]/15">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <span className="truncate text-sm font-medium text-white">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
-};
-
+}

@@ -1,117 +1,140 @@
-"use client";
+import { Brain, BarChart3, Sparkles, Lightbulb, GraduationCap, Target } from 'lucide-react';
+import { personalInfo } from '../data/personal';
+import {
+  RevealSection,
+  SectionHeader,
+  StaggerContainer,
+  StaggerItem,
+} from './MotionPrimitives';
 
-import React from "react";
-import { portfolioData } from "@/data/portfolioData";
-import { GraduationCap, Briefcase, Brain, CheckCircle2, Star } from "lucide-react";
+const INTEREST_ICONS = [Brain, BarChart3, Sparkles, Lightbulb];
 
-export const About: React.FC = () => {
+export function About() {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-white">
-      <div className="max-w-6xl mx-auto space-y-12">
-        {/* Section Heading */}
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-widest text-[#777777] font-semibold">
-            01 // Profile
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight">
-            About Me
-          </h2>
-        </div>
+    <section
+      id="about"
+      className="border-b border-[#303A33]/70 bg-[#171C19] py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeader
+          eyebrow="About"
+          title="A Little About Me"
+          description="Combining machine learning fundamentals, analytical rigor, and modern software engineering."
+        />
 
-        {/* Grid Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main Biography */}
-          <div className="lg:col-span-7 space-y-6">
-            <p className="text-base text-[#111111] leading-relaxed">
-              I am a <strong className="font-semibold">Final-year B.Tech Artificial Intelligence and Machine Learning student</strong> at Sri Shakthi Institute of Engineering and Technology, Coimbatore (CGPA: 7.18 / 10), with hands-on project experience in Python, SQL, Power BI, and Machine Learning.
-            </p>
-            <p className="text-sm sm:text-base text-[#111111]/80 leading-relaxed">
-              I have developed end-to-end machine learning models achieving <strong className="font-semibold text-[#111111]">85% accuracy and 0.82 AUC-ROC</strong>, along with interactive Power BI dashboards that <strong className="font-semibold text-[#111111]">reduced reporting turnaround time by 40%</strong>. Skilled in exploratory data analysis (EDA), predictive modeling, dashboard development, and KPI reporting.
-            </p>
-            <p className="text-sm sm:text-base text-[#111111]/80 leading-relaxed">
-              My technical background includes practical experience as a <strong className="font-semibold text-[#111111]">Data Analyst at Thiranex</strong>, transforming raw operational datasets into actionable business intelligence.
-            </p>
-
-            {/* Career Objective Box */}
-            <div className="p-5 border border-[#E5E5E5] rounded-lg bg-[#F2F2F2]/50 space-y-2">
-              <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-[#111111]">
-                <Brain className="w-4 h-4 text-[#111111]" />
-                <span>Career Objective</span>
+        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Left Column: Engineering & Academic Profile Card */}
+          <RevealSection className="lg:col-span-5">
+            <div className="overflow-hidden rounded-2xl border border-[#303A33] bg-[#1D2520]">
+              <div className="relative border-b border-[#303A33] bg-[#101312] p-7">
+                <div className="bg-grid-pattern absolute inset-0 opacity-40" />
+                <div className="relative space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs tracking-wider text-[#9BE15D] uppercase">
+                      Engineering Profile
+                    </span>
+                    <span className="rounded-md border border-[#303A33] bg-[#171C19] px-2.5 py-1 font-mono text-[11px] text-[#A5AEA8]">
+                      {personalInfo.education.graduation}
+                    </span>
+                  </div>
+                  <div className="rounded-xl border border-[#303A33] bg-[#171C19] p-5">
+                    <p className="font-mono text-xs text-[#A5AEA8]">
+                      // Specialization
+                    </p>
+                    <p className="mt-1.5 font-display text-lg font-semibold text-white">
+                      {personalInfo.education.specialization}
+                    </p>
+                    <p className="mt-1 text-xs text-[#A5AEA8]">
+                      {personalInfo.education.institution}
+                    </p>
+                    <div className="mt-4 flex items-center justify-between border-t border-[#303A33] pt-3">
+                      <span className="font-mono text-xs text-[#A5AEA8]">
+                        Academic Score
+                      </span>
+                      <span className="font-mono text-sm font-semibold text-[#9BE15D]">
+                        CGPA {personalInfo.education.cgpa}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-xs sm:text-sm text-[#111111]/85 leading-relaxed">
-                {portfolioData.profile.careerObjective}
-              </p>
-            </div>
 
-            {/* Core Competencies */}
-            <div className="space-y-2 pt-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
-                Core Competencies
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.profile.coreCompetencies.map((comp) => (
-                  <span
-                    key={comp}
-                    className="px-3 py-1 text-xs font-medium text-[#111111] bg-white border border-[#E5E5E5] rounded-md shadow-sm"
-                  >
-                    {comp}
-                  </span>
-                ))}
+              {/* Education & Career Objective Summary Cards */}
+              <div className="space-y-4 p-6">
+                <div className="flex items-start gap-3.5 rounded-xl border border-[#303A33] bg-[#171C19] p-4">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1D2520] text-[#9BE15D]">
+                    <GraduationCap className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">
+                      {personalInfo.education.degree} &mdash;{' '}
+                      {personalInfo.education.specialization}
+                    </h3>
+                    <p className="mt-1 text-xs text-[#A5AEA8]">
+                      {personalInfo.education.status} &bull; CGPA{' '}
+                      <span className="font-medium text-[#9BE15D]">
+                        {personalInfo.education.cgpa}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5 rounded-xl border border-[#303A33] bg-[#171C19] p-4">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1D2520] text-[#9BE15D]">
+                    <Target className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">
+                      Target Roles
+                    </h3>
+                    <p className="mt-1 text-xs text-[#A5AEA8]">
+                      AI / Machine Learning Engineer &bull; Data Analyst
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </RevealSection>
 
-          {/* Side Info Cards */}
-          <div className="lg:col-span-5 space-y-4">
-            {/* Education Highlight Card */}
-            <div className="p-5 border border-[#E5E5E5] rounded-lg bg-white space-y-2 hover:border-[#111111] transition-colors">
-              <div className="flex items-center space-x-2 text-[#111111]">
-                <GraduationCap className="w-4 h-4" />
-                <h3 className="text-sm font-bold">Academic Background</h3>
-              </div>
-              <p className="text-xs font-semibold text-[#111111]">
-                {portfolioData.education.degree}
+          {/* Right Column: Narrative + Core Interest Cards */}
+          <div className="lg:col-span-7">
+            <RevealSection delay={0.08} className="space-y-5">
+              <p className="text-base leading-relaxed text-white/95 sm:text-lg">
+                {personalInfo.introduction}
               </p>
-              <p className="text-xs text-[#777777]">
-                {portfolioData.education.institution}
-              </p>
-              <div className="flex items-center justify-between text-xs text-[#777777] pt-1 border-t border-[#E5E5E5]">
-                <span>{portfolioData.education.expectedYear}</span>
-                <span className="font-semibold text-[#111111]">CGPA: {portfolioData.education.cgpa}</span>
+              <div className="rounded-xl border border-[#303A33] bg-[#1D2520] p-5">
+                <span className="font-mono text-xs tracking-wider text-[#9BE15D] uppercase">
+                  Career Objective
+                </span>
+                <p className="mt-2 text-sm leading-relaxed text-[#A5AEA8] sm:text-base">
+                  {personalInfo.careerObjective}
+                </p>
               </div>
-            </div>
+            </RevealSection>
 
-            {/* Experience Highlight Card */}
-            <div className="p-5 border border-[#E5E5E5] rounded-lg bg-white space-y-2 hover:border-[#111111] transition-colors">
-              <div className="flex items-center space-x-2 text-[#111111]">
-                <Briefcase className="w-4 h-4" />
-                <h3 className="text-sm font-bold">Industry Experience</h3>
-              </div>
-              <p className="text-xs font-semibold text-[#111111]">
-                Data Analyst &bull; Thiranex
-              </p>
-              <p className="text-xs text-[#777777]">
-                Coimbatore, Tamil Nadu, India
-              </p>
-            </div>
-
-            {/* Technical Interests */}
-            <div className="p-5 border border-[#E5E5E5] rounded-lg bg-white space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
-                Key Focus Areas
-              </h3>
-              <ul className="space-y-2 text-xs text-[#111111]/80">
-                {portfolioData.profile.technicalInterests.map((interest, idx) => (
-                  <li key={idx} className="flex items-start space-x-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#111111] mt-0.5 shrink-0" />
-                    <span>{interest}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <StaggerContainer className="mt-8 grid gap-4 sm:grid-cols-2">
+              {personalInfo.interests.map((interest, idx) => {
+                const Icon = INTEREST_ICONS[idx % INTEREST_ICONS.length];
+                return (
+                  <StaggerItem key={interest.title}>
+                    <div className="group h-full rounded-xl border border-[#303A33] bg-[#1D2520] p-5 transition-colors duration-200 hover:border-[#9BE15D]/50">
+                      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#303A33] bg-[#171C19] text-[#9BE15D] transition-colors group-hover:border-[#9BE15D]/40">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-display text-base font-semibold text-white">
+                        {interest.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-[#A5AEA8]">
+                        {interest.description}
+                      </p>
+                    </div>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerContainer>
           </div>
         </div>
       </div>
     </section>
   );
-};
+}

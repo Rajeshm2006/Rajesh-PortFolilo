@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <rect width="640" height="400" fill="#101312"/>
+  <path d="M0 80H640M0 160H640M0 240H640M0 320H640M128 0V400M256 0V400M384 0V400M512 0V400" stroke="#303A33" stroke-opacity="0.35" stroke-width="1"/>
+  <!-- Architecture Flow -->
+  <rect x="44" y="64" width="156" height="96" rx="10" fill="#171C19" stroke="#303A33" stroke-width="1.5"/>
+  <text x="62" y="96" fill="#9BE15D" font-family="monospace" font-size="10">01 / INPUT</text>
+  <text x="62" y="120" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600">Resume Parser</text>
+  <text x="62" y="140" fill="#A5AEA8" font-family="sans-serif" font-size="11">Skills &amp; Experience</text>
+
+  <path d="M200 112H242" stroke="#9BE15D" stroke-width="2" stroke-dasharray="4 4"/>
+  <circle cx="242" cy="112" r="3" fill="#9BE15D"/>
+
+  <rect x="242" y="64" width="156" height="96" rx="10" fill="#1D2520" stroke="#9BE15D" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="260" y="96" fill="#9BE15D" font-family="monospace" font-size="10">02 / GEMINI AI</text>
+  <text x="260" y="120" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600">Question Engine</text>
+  <text x="260" y="140" fill="#A5AEA8" font-family="sans-serif" font-size="11">Tailored Prompts</text>
+
+  <path d="M398 112H440" stroke="#9BE15D" stroke-width="2" stroke-dasharray="4 4"/>
+  <circle cx="440" cy="112" r="3" fill="#9BE15D"/>
+
+  <rect x="440" y="64" width="156" height="96" rx="10" fill="#171C19" stroke="#303A33" stroke-width="1.5"/>
+  <text x="458" y="96" fill="#9BE15D" font-family="monospace" font-size="10">03 / EVALUATION</text>
+  <text x="458" y="120" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600">AI Feedback</text>
+  <text x="458" y="140" fill="#A5AEA8" font-family="sans-serif" font-size="11">Scoring Dashboard</text>
+
+  <!-- Bottom Interview Panel -->
+  <rect x="44" y="196" width="552" height="142" rx="12" fill="#171C19" stroke="#303A33" stroke-width="1.5"/>
+  <text x="68" y="226" fill="#A5AEA8" font-family="monospace" font-size="11">FASTAPI + POSTGRESQL + REACT + TYPESCRIPT</text>
+  <rect x="68" y="246" width="320" height="16" rx="4" fill="#1D2520"/>
+  <rect x="68" y="274" width="248" height="12" rx="4" fill="#1D2520"/>
+  <rect x="68" y="298" width="286" height="12" rx="4" fill="#1D2520"/>
+  <rect x="430" y="246" width="142" height="64" rx="8" fill="#1D2520" stroke="#303A33"/>
+  <text x="450" y="272" fill="#A5AEA8" font-family="monospace" font-size="10">FEEDBACK LOOP</text>
+  <text x="450" y="294" fill="#9BE15D" font-family="monospace" font-size="13" font-weight="bold">ACTIVE</text>
+</svg>
